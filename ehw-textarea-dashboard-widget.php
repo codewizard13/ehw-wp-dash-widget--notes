@@ -34,13 +34,15 @@ function ehw_textarea_dashboard_widget_callback()
     'post_type' => ['event']
   ];
 
-  $recent_posts = wp_get_recent_posts( $args );
+  $recent_posts = wp_get_recent_posts($args);
 
   echo '<ul>';
 
   foreach ($recent_posts as $recent_post) {
-    $thisPost = $recent_post['ID'];
-    echo '<li><a href="' . get_permalink($recent_post['ID']) . '">' . $recent_post['post_title'] . '</a></li>';
+    $post_row = '<li><a href="' . get_permalink($recent_post['ID']) . '">';
+    $post_row .= $recent_post['post_title'];
+    $post_row .= '</a></li>';
+    echo $post_row;
   }
 
   echo '</ul>';
@@ -52,12 +54,12 @@ function ehw_textarea_dashboard_widget_callback()
 
 function ehw_textarea_dashboard_widget_control()
 {
-  if ( isset( $_POST['ehw_textarea_dashboard_widget_numberposts'] ) ) {
-    $numberposts = sanitize_text_field( $_POST['ehw_textarea_dashboard_widget_numberposts'] );
-    update_option( 'ehw_textarea_dashboard_widget_numberposts', $numberposts );
+  if (isset($_POST['ehw_textarea_dashboard_widget_numberposts'])) {
+    $numberposts = sanitize_text_field($_POST['ehw_textarea_dashboard_widget_numberposts']);
+    update_option('ehw_textarea_dashboard_widget_numberposts', $numberposts);
   }
 
-  $numberposts = get_option('ehw_textarea_dashboard_widget_numberposts', 5 );
+  $numberposts = get_option('ehw_textarea_dashboard_widget_numberposts', 5);
   echo '<label>Enter the number of posts to display</label>';
   echo '<input type="text" name="ehw_textarea_dashboard_widget_numberposts" value="' . $numberposts . '" />';
 }
