@@ -1,0 +1,63 @@
+<?php
+/**
+ * 
+ * Plugin Name:     EHW Textarea Dashboard Widget 
+ * Description:     Display editable textarea dashboard widget
+ * Version:         01.00.00
+ * Date Created:    01/20/27
+ * Author:          Eric L. Hepperle
+ * Author URI:      erichepperle.com
+ * Developer:       Eric Hepperle
+ * 
+ * Inspired by WP Learn Dashboard Widgets
+ */
+
+add_action('wp_dashboard_setup', 'ehw_textarea_dashboard_widget');
+
+function ehw_textarea_dashboard_widget()
+{
+  wp_add_dashboard_widget(
+    'ehw_textarea_dashboard_widget',
+    'EHW: Textarea Dashboard Widget',
+    'ehw_textarea_dashboard_widget_callback',
+    'ehw_textarea_dashboard_widget_control'
+  );
+}
+
+function ehw_textarea_dashboard_widget_callback()
+{
+  $numberposts = get_option('ehw_textarea_dashboard_widget_numberposts', 5);
+
+  $args = [
+    'posts_per_page' => $numberposts,
+    'post_status' => 'publish',
+    'post_type' => ['event']
+  ];
+
+  $recent_posts = wp_get_recent_posts( $args );
+
+  echo '<ul>';
+
+  foreach ($recent_posts as $recent_post) {
+    $thisPost = $recent_post['ID'];
+    echo '<li><a href="' . get_permalink($recent_post['ID']) . '">' . $recent_post['post_title'] . '</a></li>';
+  }
+
+  echo '</ul>';
+
+
+}
+
+
+
+function ehw_textarea_dashboard_widget_control()
+{
+  if ( isset( $_POST['ehw_textarea_dashboard_widget_numberposts'] ) ) {
+    $numberposts = sanitize_text_field( $_POST['ehw_textarea_dashboard_widget_numberposts'] );
+    update_option( 'ehw_textarea_dashboard_widget_numberposts', $numberposts );
+  }
+
+  $numberposts = get_option('ehw_textarea_dashboard_widget_numberposts', 5 );
+  echo '<label>Enter the number of posts to display</label>';
+  echo '<input type="text" name="ehw_textarea_dashboard_widget_numberposts" value="' . $numberposts . '" />';
+}
