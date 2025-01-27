@@ -26,6 +26,20 @@ function ehw_textarea_dashboard_widget()
 
 function ehw_textarea_dashboard_widget_callback()
 {
+  ?>
+<style>
+.ehw-post-title {
+    margin-left: .6rem !important;
+}
+.ehw-dash-row a {
+    display: inline-flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    align-items: stretch;
+}
+</style>
+<?php
+
   $numberposts = get_option('ehw_textarea_dashboard_widget_numberposts', 5);
 
   $args = [
@@ -36,6 +50,7 @@ function ehw_textarea_dashboard_widget_callback()
 
   $recent_posts = wp_get_recent_posts($args);
 
+
   echo '<ul>';
 
   foreach ($recent_posts as $recent_post) {
@@ -45,14 +60,18 @@ function ehw_textarea_dashboard_widget_callback()
       $postThumb = get_the_post_thumbnail($postId, [40,40]);
     }
 
-    $post_row = '<li><a href="' . get_permalink($postId) . '">';
+    $postTitle = function_exists('elsm_trunc_text') ? elsm_trunc_text($recent_post['post_title'], 64) : $recent_post['post_title'];
+
+    $post_row = '<li class="ehw-dash-row"><a href="' . get_permalink($postId) . '">';
     $post_row .= $postThumb ? $postThumb : '';
-    $post_row .= $recent_post['post_title'];
+    $post_row .= '<span class="ehw-post-title">' . $postTitle . '</span>';
     $post_row .= '</a></li>';
     echo $post_row;
+
   }
 
   echo '</ul>';
+
 
 
 }
