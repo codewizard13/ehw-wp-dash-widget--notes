@@ -39,7 +39,14 @@ function ehw_textarea_dashboard_widget_callback()
   echo '<ul>';
 
   foreach ($recent_posts as $recent_post) {
-    $post_row = '<li><a href="' . get_permalink($recent_post['ID']) . '">';
+    $postId = $recent_post['ID'];
+
+    if ( has_post_thumbnail( $postId ) ) {
+      $postThumb = get_the_post_thumbnail($postId, [40,40]);
+    }
+
+    $post_row = '<li><a href="' . get_permalink($postId) . '">';
+    $post_row .= $postThumb ? $postThumb : '';
     $post_row .= $recent_post['post_title'];
     $post_row .= '</a></li>';
     echo $post_row;
