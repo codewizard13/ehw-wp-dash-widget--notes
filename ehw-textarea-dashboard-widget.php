@@ -20,7 +20,9 @@ function ehw_textarea_dashboard_widget()
     'ehw_textarea_dashboard_widget',
     'EHW: Textarea Dashboard Widget',
     'ehw_textarea_dashboard_widget_callback',
-    'ehw_textarea_dashboard_widget_control'
+    'ehw_textarea_dashboard_widget_control',
+    ['description' => 'This is a description'],
+    'column3'
   );
 }
 
