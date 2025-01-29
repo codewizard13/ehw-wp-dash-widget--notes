@@ -26,7 +26,7 @@ function ehw_textarea_dashboard_widget()
   );
 }
 
-function ehw_textarea_dashboard_widget_callback()
+function ehw_textarea_dashboard_widget_callback($screen, $widget_args)
 {
   ?>
 <style>
@@ -52,6 +52,9 @@ function ehw_textarea_dashboard_widget_callback()
 
   $recent_posts = wp_get_recent_posts($args);
 
+  ?>
+  <b>Description: </b><?php echo $widget_args['args']['description'] ?><br>
+  <?php
 
   echo '<ul>';
 
