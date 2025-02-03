@@ -3,13 +3,15 @@
  * 
  * Plugin Name:     EHW Textarea Dashboard Widget 
  * Description:     Display editable textarea dashboard widget
- * Version:         01.00.00
- * Date Created:    01/20/27
- * Date Modified:   01/29/27
+ * Version:         00.01.01
+ * Date Created:    01/20/2025
+ * Date Modified:   02/03/2025
  * Author:          Eric L. Hepperle
  * Author URI:      erichepperle.com
  * 
  * Inspired by WP Learn Dashboard Widgets: https://www.youtube.com/watch?v=sgC9ISgPpNQ
+ * 
+ * Tags: Textarea, Notes, Dashboard Widget
  */
 
 add_action('wp_dashboard_setup', 'ehw_textarea_dashboard_widget');
