@@ -71,9 +71,11 @@ if (!function_exists('ehw_dash_widget_notes_callback')) {
       <?php wp_nonce_field('update-options'); ?>
 
 
-      <?php $textcontent = get_option('ehw_dash_widget_notes_textcontent', 'Default dummy textcontent'); ?>
+      <?php $textcontent = get_option('ehw_dash_widget_notes_text', 'Default dummy textcontent'); ?>
 
-      <textarea id="results" name="ehw_dash_widget_notes_textcontent" readonly><?php echo get_option( 'ehw_dash_widget_notes_textcontent') ?></textarea>
+      <textarea id="results" name="ehw_dash_widget_notes_text" readonly><?php echo get_option( 'ehw_dash_widget_notes_text') ?></textarea>
+      <input type="hidden" name="action" value="update" />
+      <input type="hidden" name="page_options" value=""
 
     </form><!-- END FORM -->
 
@@ -92,14 +94,14 @@ if (!function_exists('ehw_dash_widget_notes_callback')) {
 // Setup widget controls
 function ehw_dash_widget_notes_control()
 {
-  if (isset($_POST['ehw_dash_widget_notes_textcontent'])) {
-    $numberposts = sanitize_text_field($_POST['ehw_dash_widget_notes_textcontent']);
-    update_option('ehw_dash_widget_notes_textcontent', $textcontent);
+  if (isset($_POST['ehw_dash_widget_notes_text'])) {
+    $numberposts = sanitize_text_field($_POST['ehw_dash_widget_notes_text']);
+    update_option('ehw_dash_widget_notes_text', $textcontent);
   }
 
-  $numberposts = get_option('ehw_dash_widget_notes_textcontent', 5);
+  $numberposts = get_option('ehw_dash_widget_notes_text', 5);
   echo '<label>Enter some text:</label>';
-  echo '<textarea id="textcontent" name="ehw_dash_widget_notes_textcontent" name="textcontent" rows="5" cols="33" >';
+  echo '<textarea id="textcontent" name="ehw_dash_widget_notes_text" name="textcontent" rows="5" cols="33" >';
   echo 'Starter Text' . '</textarea>';
 
 }
