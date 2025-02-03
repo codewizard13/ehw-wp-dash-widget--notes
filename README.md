@@ -34,14 +34,6 @@
 
 ## SCREENSHOTS
 
-**_Dashboard Widget v 1.00, Jan 31, 2025_**
-
-![Dashboard Widget v 1.00, Jan 31, 2025](/screens/screen-01-dash-widget.jpg)
-
-**_Dashboard Widget v 1.01, Feb 3, 2025_**
-
-![Dashboard Widget v 1.01, Feb 3, 2025](/screens/screen-02-dash-widget.jpg)
-
 **_Dashboard Widget v 1.01, Feb 3, 2025_**
 
 ![Dashboard Widget v 1.02, Feb 3, 2025](/screens/screen-03-dash-widget.jpg)
