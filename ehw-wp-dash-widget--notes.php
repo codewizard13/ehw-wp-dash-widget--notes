@@ -100,11 +100,6 @@ if (!function_exists('ehw_dash_widget_notes_callback')) {
 
     <?php
 
-
-
-
-
-
   }
 
 }
