@@ -14,13 +14,14 @@
  * Tags: Textarea, Notes, Dashboard Widget
  */
 
+ /**
+  * Hepperle - 2025-02-03 -- Testing suggested edits by Perplexity: https://www.perplexity.ai/search/i-created-this-wordpress-dashb-_K873rm0QoWXod.RF_JFjg
+  */
 
-// Registger widget
+// Register widget (B)
 function ehw_dash_widget_notes()
 {
-
   if (current_user_can('manage_options')) {
-
     wp_add_dashboard_widget(
       'ehw_dash_widget_notes',
       'EHW: Textarea Dashboard Widget',
@@ -30,18 +31,28 @@ function ehw_dash_widget_notes()
       'column3',
       'high'
     );
-
   }
 }
 add_action('wp_dashboard_setup', 'ehw_dash_widget_notes');
 
-
 // Display widget
-
 if (!function_exists('ehw_dash_widget_notes_callback')) {
-
   function ehw_dash_widget_notes_callback($screen, $widget_args)
   {
+    // Check if form is submitted
+    if (isset($_POST['ehw_dash_widget_notes_submit'])) {
+      // Update textarea content
+      update_option('ehw_dash_widget_notes_text', sanitize_textarea_field($_POST['ehw_dash_widget_notes_text']));
+
+      // Update checkbox state
+      $is_read_only = isset($_POST['is_read_only']) ? 'checked' : '';
+      update_option('ehw_dash_widget_notes_readonly', $is_read_only);
+    }
+
+    // Get current values
+    $textarea_content = get_option('ehw_dash_widget_notes_text', '');
+    $is_read_only = get_option('ehw_dash_widget_notes_readonly', '');
+
     ?>
     <style>
       .ehw-post-title {
@@ -67,39 +78,22 @@ if (!function_exists('ehw_dash_widget_notes_callback')) {
     <div class="notes-descr"><b>Description: </b><?php echo $widget_args['args']['description'] ?></div>
 
     <!-- START FORM -->
-    <form action="options.php" method="post">
+    <form method="post">
+      <?php wp_nonce_field('ehw_dash_widget_notes_action', 'ehw_dash_widget_notes_nonce'); ?>
 
-      <!-- Nonce for form security -->
-      <?php wp_nonce_field('update-options'); ?>
-
-
-      <textarea id="results"
-        name="ehw_dash_widget_notes_text"><?php echo get_option('ehw_dash_widget_notes_text') ?></textarea>
-
+      <textarea id="results" name="ehw_dash_widget_notes_text"><?php echo esc_textarea($textarea_content); ?></textarea>
 
       <fieldset>
-
         <div>
-          <input type="checkbox" id="is-read-only" name="is-read-only" <?php echo get_option('is-read-only') ?> />
-          <label for="is-read-only">Read-only?</label>
+          <input type="checkbox" id="is_read_only" name="is_read_only" <?php checked($is_read_only, 'checked'); ?> />
+          <label for="is_read_only">Read-only?</label>
         </div>
-
       </fieldset>
 
-      <!-- hidden fields pass values -->
-
-      <input type="hidden" name="action" value="update" />
-      <input type="hidden" name="page_options" value="ehw_dash_widget_notes_text, is-read-only" />
-
-
       <p class="submit">
-        <input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>">
+        <input type="submit" name="ehw_dash_widget_notes_submit" class="button-primary" value="<?php _e('Save Changes') ?>">
       </p>
-
     </form><!-- END FORM -->
-
     <?php
-
   }
-
 }
