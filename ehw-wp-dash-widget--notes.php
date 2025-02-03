@@ -32,6 +32,7 @@
           }
   
           echo '<style>
+                  #ehw_notes_widget {background:#ffffe1;}
                   #ehw_notes { width: 100%; height: 150px; }
                   #ehw_notes_iframe { width: 100%; height: 200px; border: 1px solid #ccc; margin-top: 10px; }
                   #save_notes { margin-top: 10px; padding: 5px 10px; cursor: pointer; }
