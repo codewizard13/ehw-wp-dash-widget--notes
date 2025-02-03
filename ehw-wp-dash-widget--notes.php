@@ -55,8 +55,8 @@ if (!function_exists('ehw_dash_widget_notes_callback')) {
 
     ?>
     <style>
-      .ehw-post-title {
-        margin-left: .6rem !important;
+      :root {
+        --margin-med: .5rem; /* medium margin */
       }
 
       .ehw-dash-row a {
@@ -67,11 +67,17 @@ if (!function_exists('ehw_dash_widget_notes_callback')) {
       }
 
       .notes-descr {
-        margin-bottom: .8rem !important;
+        margin-bottom: calc( var(--margin-med) * 1.2);
+        
       }
 
       #results {
         width: 100%;
+        margin-bottom: var(--margin-med);
+
+      }
+      fieldset {
+        margin-bottom: calc( var(--margin-med) * 1.2);
       }
     </style>
 
@@ -81,7 +87,7 @@ if (!function_exists('ehw_dash_widget_notes_callback')) {
     <form method="post">
       <?php wp_nonce_field('ehw_dash_widget_notes_action', 'ehw_dash_widget_notes_nonce'); ?>
 
-      <textarea id="results" name="ehw_dash_widget_notes_text"><?php echo esc_textarea($textarea_content); ?></textarea>
+      <textarea id="results" name="ehw_dash_widget_notes_text" <?php echo $is_read_only == 'checked' ? 'readonly' : '' ?>><?php echo esc_textarea($textarea_content); ?></textarea>
 
       <fieldset>
         <div>
