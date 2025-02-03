@@ -15,16 +15,16 @@
  */
 
 
-function ehw_textarea_dashboard_widget()
+function ehw_dash_widget_notes()
 {
 
   if (current_user_can('manage_options')) {
 
     wp_add_dashboard_widget(
-      'ehw_textarea_dashboard_widget',
+      'ehw_dash_widget_notes',
       'EHW: Textarea Dashboard Widget',
-      'ehw_textarea_dashboard_widget_callback',
-      'ehw_textarea_dashboard_widget_control',
+      'ehw_dash_widget_notes_callback',
+      'ehw_dash_widget_notes_control',
       ['description' => 'This is a description'],
       'column3',
       'high'
@@ -32,12 +32,12 @@ function ehw_textarea_dashboard_widget()
 
   }
 }
-add_action('wp_dashboard_setup', 'ehw_textarea_dashboard_widget');
+add_action('wp_dashboard_setup', 'ehw_dash_widget_notes');
 
 
-if (!function_exists('ehw_textarea_dashboard_widget_callback')) {
+if (!function_exists('ehw_dash_widget_notes_callback')) {
 
-  function ehw_textarea_dashboard_widget_callback($screen, $widget_args)
+  function ehw_dash_widget_notes_callback($screen, $widget_args)
   {
     ?>
       <style>
@@ -57,8 +57,8 @@ if (!function_exists('ehw_textarea_dashboard_widget_callback')) {
   
       <?php
   
-      $textcontent = get_option('ehw_textarea_dashboard_widget_textcontent', 'Default dummy textcontent');
-      echo '<textarea id="results" name="ehw_textarea_dashboard_widget_textcontent" readonly>' . $textcontent . '</textarea>';
+      $textcontent = get_option('ehw_dash_widget_notes_textcontent', 'Default dummy textcontent');
+      echo '<textarea id="results" name="ehw_dash_widget_notes_textcontent" readonly>' . $textcontent . '</textarea>';
   
   }
 
@@ -66,16 +66,16 @@ if (!function_exists('ehw_textarea_dashboard_widget_callback')) {
 
 
 
-function ehw_textarea_dashboard_widget_control()
+function ehw_dash_widget_notes_control()
 {
-  if (isset($_POST['ehw_textarea_dashboard_widget_textcontent'])) {
-    $numberposts = sanitize_text_field($_POST['ehw_textarea_dashboard_widget_textcontent']);
-    update_option('ehw_textarea_dashboard_widget_textcontent', $textcontent);
+  if (isset($_POST['ehw_dash_widget_notes_textcontent'])) {
+    $numberposts = sanitize_text_field($_POST['ehw_dash_widget_notes_textcontent']);
+    update_option('ehw_dash_widget_notes_textcontent', $textcontent);
   }
 
-  $numberposts = get_option('ehw_textarea_dashboard_widget_textcontent', 5);
+  $numberposts = get_option('ehw_dash_widget_notes_textcontent', 5);
   echo '<label>Enter some text:</label>';
-  echo '<textarea id="textcontent" name="ehw_textarea_dashboard_widget_textcontent" name="textcontent" rows="5" cols="33" >';
+  echo '<textarea id="textcontent" name="ehw_dash_widget_notes_textcontent" name="textcontent" rows="5" cols="33" >';
   echo 'Starter Text' . '</textarea>';
 
 }
