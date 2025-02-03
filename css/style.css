@@ -1,0 +1,128 @@
+/* style.css */
+
+/* NOTES:
+- /img/some-image.jpg doesn't work, therefore, for now, the default placeholder images must be kept in the css/ folder 
+
+*/
+
+:root {
+  --sidebar-width: 272px;
+  --content-max-width: 1185px;
+  --dummy-vid-thumb: url("placeholder-vid-thumb-768x432.jpg");
+}
+
+
+
+.container {
+  display: grid;
+  grid-template-areas:
+    "header"
+    "content-wrapper"
+    "footer";
+  grid-template-rows: auto 1fr auto;
+  height: 100vh;
+  background: lightgoldenrodyellow;
+}
+
+/* A wrapper to contain the main grid */
+.content-wrapper {
+  display: grid;
+  grid-template-areas:
+    "content side";
+  grid-template-columns: 1fr var(--sidebar-width);
+  max-width: var(--content-max-width); /* Limits content width */
+  width: 100%;
+  margin: 0 auto; /* Centers content */
+  gap: 10px;
+}
+
+/* Header and Footer spanning full width */
+header,
+footer {
+  grid-area: header;
+  width: 100%;
+  /*max-width: 1400px; /* Wider than content */
+  margin: 0 auto; /* Centers header/footer */
+  padding: 1rem;
+  background: sandybrown;
+  min-height: 3rem;
+}
+
+footer {
+  grid-area: footer;
+}
+
+/* Main Content and Sidebar */
+main {
+  grid-area: content;
+  background: lightblue;
+}
+
+aside {
+  grid-area: side;
+  background: lightgreen
+}
+
+
+
+.thumb {
+  width: 100%;
+  aspect-ratio: 768 / 432;
+  border: 2px solid purple;
+  background-image: var(--dummy-vid-thumb);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+
+
+/* 🟢 Tablet Breakpoint (Keep Sidebar Next to Main) */
+@media (max-width: 1024px) {
+  .content-wrapper {
+    grid-template-columns: 3fr 1fr; /* Adjust proportions */
+    max-width: 95%; /* Slightly reduce max width */
+    gap: 8px;
+  }
+
+  main {
+    padding: 1rem;
+  }
+
+  aside {
+    padding: 1rem;
+    text-align: center;
+  }
+}
+
+
+/* 🔵 Mobile Breakpoint (One Column Layout) */
+@media (max-width: 768px) {
+  .container {
+    grid-template-areas:
+      "header"
+      "content"
+      "side"
+      "footer";
+  }
+
+  .content-wrapper {
+    grid-template-areas:
+      "content"
+      "side";
+    grid-template-columns: 1fr;
+    width: 100%;
+    max-width: 100%;
+    gap: 5px;
+  }
+
+  header,
+  footer {
+    padding: 0.75rem;
+    text-align: center;
+  }
+
+  main,
+  aside {
+    padding: 1rem;
+  }
+}
