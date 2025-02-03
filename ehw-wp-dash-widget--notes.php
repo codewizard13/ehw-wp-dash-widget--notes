@@ -73,9 +73,10 @@ if (!function_exists('ehw_dash_widget_notes_callback')) {
 
       <?php $textcontent = get_option('ehw_dash_widget_notes_text', 'Default dummy textcontent'); ?>
 
-      <textarea id="results" name="ehw_dash_widget_notes_text" readonly><?php echo get_option( 'ehw_dash_widget_notes_text') ?></textarea>
+      <textarea id="results" name="ehw_dash_widget_notes_text" ><?php echo get_option( 'ehw_dash_widget_notes_text') ?></textarea>
+
       <input type="hidden" name="action" value="update" />
-      <input type="hidden" name="page_options" value=""
+      <input type="hidden" name="page_options" value="ehw_dash_widget_notes_text" />
 
     </form><!-- END FORM -->
 
