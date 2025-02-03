@@ -77,6 +77,9 @@ if (!function_exists('ehw_dash_widget_notes_callback')) {
 
       <input type="hidden" name="action" value="update" />
       <input type="hidden" name="page_options" value="ehw_dash_widget_notes_text" />
+      <p class="submit">
+        <input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>">
+      </p>
 
     </form><!-- END FORM -->
 
