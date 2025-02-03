@@ -14,44 +14,56 @@
  * Tags: Textarea, Notes, Dashboard Widget
  */
 
-add_action('wp_dashboard_setup', 'ehw_textarea_dashboard_widget');
 
 function ehw_textarea_dashboard_widget()
 {
-  wp_add_dashboard_widget(
-    'ehw_textarea_dashboard_widget',
-    'EHW: Textarea Dashboard Widget',
-    'ehw_textarea_dashboard_widget_callback',
-    'ehw_textarea_dashboard_widget_control',
-    ['description' => 'This is a description'],
-    'column3',
-    'high'
-  );
+
+  if (current_user_can('manage_options')) {
+
+    wp_add_dashboard_widget(
+      'ehw_textarea_dashboard_widget',
+      'EHW: Textarea Dashboard Widget',
+      'ehw_textarea_dashboard_widget_callback',
+      'ehw_textarea_dashboard_widget_control',
+      ['description' => 'This is a description'],
+      'column3',
+      'high'
+    );
+
+  }
+}
+add_action('wp_dashboard_setup', 'ehw_textarea_dashboard_widget');
+
+
+if (!function_exists('ehw_textarea_dashboard_widget_callback')) {
+
+  function ehw_textarea_dashboard_widget_callback($screen, $widget_args)
+  {
+    ?>
+      <style>
+        .ehw-post-title {
+          margin-left: .6rem !important;
+        }
+  
+        .ehw-dash-row a {
+          display: inline-flex;
+          justify-content: space-evenly;
+          flex-wrap: wrap;
+          align-items: stretch;
+        }
+      </style>
+  
+      <b>Description: </b><?php echo $widget_args['args']['description'] ?><br>
+  
+      <?php
+  
+      $textcontent = get_option('ehw_textarea_dashboard_widget_textcontent', 'Default dummy textcontent');
+      echo '<textarea id="results" name="ehw_textarea_dashboard_widget_textcontent" readonly>' . $textcontent . '</textarea>';
+  
+  }
+
 }
 
-function ehw_textarea_dashboard_widget_callback($screen, $widget_args)
-{
-  ?>
-<style>
-.ehw-post-title {
-    margin-left: .6rem !important;
-}
-.ehw-dash-row a {
-    display: inline-flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    align-items: stretch;
-}
-</style>
-
-<b>Description: </b><?php echo $widget_args['args']['description'] ?><br>
-
-<?php
-
-  $textcontent = get_option('ehw_textarea_dashboard_widget_textcontent', 'Default dummy textcontent');
-  echo '<textarea id="results" name="ehw_textarea_dashboard_widget_textcontent" readonly>'. $textcontent . '</textarea>';
-
-}
 
 
 function ehw_textarea_dashboard_widget_control()
