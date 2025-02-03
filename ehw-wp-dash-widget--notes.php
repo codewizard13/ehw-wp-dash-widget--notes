@@ -15,6 +15,7 @@
  */
 
 
+// Registger widget
 function ehw_dash_widget_notes()
 {
 
@@ -35,37 +36,60 @@ function ehw_dash_widget_notes()
 add_action('wp_dashboard_setup', 'ehw_dash_widget_notes');
 
 
+// Display widget
+
 if (!function_exists('ehw_dash_widget_notes_callback')) {
 
   function ehw_dash_widget_notes_callback($screen, $widget_args)
   {
     ?>
-      <style>
-        .ehw-post-title {
-          margin-left: .6rem !important;
-        }
-  
-        .ehw-dash-row a {
-          display: inline-flex;
-          justify-content: space-evenly;
-          flex-wrap: wrap;
-          align-items: stretch;
-        }
-      </style>
-  
-      <b>Description: </b><?php echo $widget_args['args']['description'] ?><br>
-  
-      <?php
-  
-      $textcontent = get_option('ehw_dash_widget_notes_textcontent', 'Default dummy textcontent');
-      echo '<textarea id="results" name="ehw_dash_widget_notes_textcontent" readonly>' . $textcontent . '</textarea>';
-  
+    <style>
+      .ehw-post-title {
+        margin-left: .6rem !important;
+      }
+
+      .ehw-dash-row a {
+        display: inline-flex;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+        align-items: stretch;
+      }
+      .notes-descr {
+        margin-bottom: .8rem !important;
+      }
+      #results {
+        width: 100%;
+      }
+    </style>
+
+    <div class="notes-descr"><b>Description: </b><?php echo $widget_args['args']['description'] ?></div>
+
+    <!-- START FORM -->
+    <form action="options.php" method="post">
+
+      <!-- Nonce for form security -->
+      <?php wp_nonce_field('update-options'); ?>
+
+
+      <?php $textcontent = get_option('ehw_dash_widget_notes_textcontent', 'Default dummy textcontent'); ?>
+
+      <textarea id="results" name="ehw_dash_widget_notes_textcontent" readonly><?php echo get_option( 'ehw_dash_widget_notes_textcontent') ?></textarea>
+
+    </form><!-- END FORM -->
+
+    <?php
+
+
+
+
+
+
   }
 
 }
 
 
-
+// Setup widget controls
 function ehw_dash_widget_notes_control()
 {
   if (isset($_POST['ehw_dash_widget_notes_textcontent'])) {
