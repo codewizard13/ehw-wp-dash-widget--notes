@@ -25,7 +25,7 @@ function ehw_dash_widget_notes()
       'ehw_dash_widget_notes',
       'EHW: Textarea Dashboard Widget',
       'ehw_dash_widget_notes_callback',
-      'ehw_dash_widget_notes_control',
+      null,
       ['description' => 'This is a description'],
       'column3',
       'high'
@@ -54,9 +54,11 @@ if (!function_exists('ehw_dash_widget_notes_callback')) {
         flex-wrap: wrap;
         align-items: stretch;
       }
+
       .notes-descr {
         margin-bottom: .8rem !important;
       }
+
       #results {
         width: 100%;
       }
@@ -71,12 +73,25 @@ if (!function_exists('ehw_dash_widget_notes_callback')) {
       <?php wp_nonce_field('update-options'); ?>
 
 
-      <?php $textcontent = get_option('ehw_dash_widget_notes_text', 'Default dummy textcontent'); ?>
+      <textarea id="results"
+        name="ehw_dash_widget_notes_text"><?php echo get_option('ehw_dash_widget_notes_text') ?></textarea>
 
-      <textarea id="results" name="ehw_dash_widget_notes_text" ><?php echo get_option( 'ehw_dash_widget_notes_text') ?></textarea>
+
+      <fieldset>
+
+        <div>
+          <input type="checkbox" id="is-read-only" name="is-read-only" <?php echo get_option('is-read-only') ?> />
+          <label for="is-read-only">Read-only?</label>
+        </div>
+
+      </fieldset>
+
+      <!-- hidden fields pass values -->
 
       <input type="hidden" name="action" value="update" />
-      <input type="hidden" name="page_options" value="ehw_dash_widget_notes_text" />
+      <input type="hidden" name="page_options" value="ehw_dash_widget_notes_text, is-read-only" />
+
+
       <p class="submit">
         <input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>">
       </p>
@@ -91,21 +106,5 @@ if (!function_exists('ehw_dash_widget_notes_callback')) {
 
 
   }
-
-}
-
-
-// Setup widget controls
-function ehw_dash_widget_notes_control()
-{
-  if (isset($_POST['ehw_dash_widget_notes_text'])) {
-    $numberposts = sanitize_text_field($_POST['ehw_dash_widget_notes_text']);
-    update_option('ehw_dash_widget_notes_text', $textcontent);
-  }
-
-  $numberposts = get_option('ehw_dash_widget_notes_text', 5);
-  echo '<label>Enter some text:</label>';
-  echo '<textarea id="textcontent" name="ehw_dash_widget_notes_text" name="textcontent" rows="5" cols="33" >';
-  echo 'Starter Text' . '</textarea>';
 
 }
