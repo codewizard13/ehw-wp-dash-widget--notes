@@ -1,9 +1,9 @@
 <?php
 /**
  * 
- * Plugin Name:     EHW Textarea Dashboard Widget 
+ * Plugin Name:     EHW Dashboard Widget: Site Notes 
  * Description:     Display editable textarea dashboard widget
- * Version:         00.01.01
+ * Version:         00.01.02
  * Date Created:    01/20/2025
  * Date Modified:   02/03/2025
  * Author:          Eric L. Hepperle
@@ -24,11 +24,20 @@ function ehw_dash_widget_notes()
   if (current_user_can('manage_options')) {
 
     // Setup variables
-    $description = "Add notes about the site (HTML is not allowed).";
+    $description = <<< DESCR
+    Add notes about the site (HTML is not allowed).<br>
+    
+    <ul>
+       <li><b>NOTE:</b> Have to save changes after toggling the readonly checkbox for it to take effect.</li>
+       <li><b>NOTE:</b> There's no way to put code snippets here yet due to html entities sanitizing.</li>
+    </ul>
+    DESCR;
+
+    $widgetTitle = "EHW Dashboard Widget: Site Notes";
 
     wp_add_dashboard_widget(
       'ehw_dash_widget_notes',
-      'EHW: Textarea Dashboard Widget',
+      $widgetTitle,
       'ehw_dash_widget_notes_callback',
       null,
       ['description' => $description],
@@ -71,7 +80,7 @@ if (!function_exists('ehw_dash_widget_notes_callback')) {
       }
 
       .notes-descr {
-        margin-bottom: calc( var(--margin-med) * 1.2);
+        margin-bottom: calc( var(--margin-med) * 1.4);
         
       }
 
