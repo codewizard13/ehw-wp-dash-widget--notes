@@ -1,11 +1,11 @@
-| INFO PROPERTY | VALUE                                   |
-| ------------- | --------------------------------------- |
+| INFO PROPERTY | VALUE                                     |
+| ------------- | ----------------------------------------- |
 | Program Name  | **WordPress Dashboard Widget: EHW Notes** |
-| File Name     | README.md                               |
+| This File     | README.md                                 |
 | Date Created  | 01/20/2025                                |
-| Date Modified | 02/03/2025                                      |
-| Version       | 00.01.01                                |
-| Programmer    | **Eric Hepperle**                       |
+| Date Modified | 02/03/2025                                |
+| Version       | 00.01.02                                  |
+| Programmer    | **Eric Hepperle**                         |
 
 ### GITHUB REPO
 
@@ -42,6 +42,9 @@
 
 ![Dashboard Widget v 1.01, Feb 3, 2025](/screens/screen-02-dash-widget.jpg)
 
+**_Dashboard Widget v 1.01, Feb 3, 2025_**
+
+![Dashboard Widget v 1.02, Feb 3, 2025](/screens/screen-03-dash-widget.jpg)
 
 ## TAGS
 
