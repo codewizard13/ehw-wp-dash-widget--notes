@@ -34,6 +34,10 @@
 
 ## SCREENSHOTS
 
+**_Dashboard Widget v 2.00, Feb 3, 2025_**: Color good, IFRAME works and render wp_kses HTML, however readonly switch is missing. But, overall, it is looking great! :)
+
+![Dashboard Widget v 1.02, Feb 3, 2025](/screens/screen-04-dash-widget.jpg)
+
 **_Dashboard Widget v 1.01, Feb 3, 2025_**
 
 ![Dashboard Widget v 1.02, Feb 3, 2025](/screens/screen-03-dash-widget.jpg)
