@@ -22,12 +22,16 @@
 function ehw_dash_widget_notes()
 {
   if (current_user_can('manage_options')) {
+
+    // Setup variables
+    $description = "Add notes about the site (HTML is not allowed).";
+
     wp_add_dashboard_widget(
       'ehw_dash_widget_notes',
       'EHW: Textarea Dashboard Widget',
       'ehw_dash_widget_notes_callback',
       null,
-      ['description' => 'This is a description'],
+      ['description' => $description],
       'column3',
       'high'
     );
@@ -74,6 +78,7 @@ if (!function_exists('ehw_dash_widget_notes_callback')) {
       #results {
         width: 100%;
         margin-bottom: var(--margin-med);
+        min-height: 200px;
 
       }
       fieldset {
